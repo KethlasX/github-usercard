@@ -36,12 +36,13 @@ for (let i = 0; i < followersArray.length; i++) {
   getGitCard(followersArray[i]);
 }
 
+
 function getGitCard(username) {
-  axios.get('https://api.github.com/users/KethlasX')
-  .then( response => {
-  document.querySelector('.cards').appendChild(cardMaker(resp.data));
-  })
-  .catch( error => console.log(err))
+  axios.get(`https://api.github.com/users/${username}`)
+    .then((res) => {
+      document.querySelector('.cards').appendChild(cardMaker(res.data));
+    })
+    .catch(error => console.log(error))
 }
 
 function cardMaker(idData) {
@@ -68,13 +69,13 @@ function cardMaker(idData) {
   userFollowers.textContent = `Followers: ${idData.followers}`;
   userFollowing.textContent = `Following: ${idData.following}`;
   userBio.textContent = idData.bio;
-  
+
   cardWrapper.classList.add('card');
   infoWrapper.classList.add('card-info');
   userName.classList.add('name');
   userUserName.classList.add('username');
 
-  
+
   cardWrapper.appendChild(userImg);
   cardWrapper.appendChild(infoWrapper);
   infoWrapper.appendChild(userName);
@@ -85,8 +86,8 @@ function cardMaker(idData) {
   infoWrapper.appendChild(userFollowers);
   infoWrapper.appendChild(userFollowing);
   infoWrapper.appendChild(userBio);
-  
-  return card;
+
+  return cardWrapper;
 }
 /*
   STEP 3: Create a function that accepts a single object as its only argument.
